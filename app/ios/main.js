@@ -19,38 +19,48 @@ import {
   Modal,
 } from 'react-native';
 
-class ToDo extends Component {
+var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
+
+class Main extends Component {
 
   constructor(props) {
+
     super(props);
     this.state = {
-      dataSource: new ListView.DataSource({
-        rowHasChanged: (row1, row2) => row1 !== row2,
-      }),
+      dataSource: ds.cloneWithRows([]),
       showModal: false
     };
     this.addItem = this.addItem.bind(this);
     this.closeModal = this.closeModal.bind(this);
   }
 
-  listenForItems() {
+  getItems() {
     firebase.database().ref(firebase.auth().currentUser.uid).on('value', (snap) => {
       var items = [];
       snap.forEach((child) => {
-        items.push({
-          value: child.val(),
-          _key: child.key
-        });
+        items.push(child.val());
       });
       console.log(items)
       this.setState({
-        dataSource: this.state.dataSource.cloneWithRows(items)
+        dataSource: ds.cloneWithRows(items)
       });
     });
   }
 
+  renderRow(rowData) {
+    return (
+      <View style={{ height:60, borderBottomWidth:1, borderBottomColor: '#ddd', flexDirection:'row', justifyContent: 'center', alignItems: 'center' }}>
+        <Text style={{ fontSize:18 }}>${rowData.amount}</Text>
+        <Text style={{ fontSize:18 }}>{rowData.category}</Text>
+      </View>
+    )
+  }
   componentWillMount() {
-    this.listenForItems();
+    this.getItems();
+  }
+
+  componentWillUpdate() {
+    console.log(this.state.dataSource)
   }
 
   addItem() {
@@ -61,23 +71,14 @@ class ToDo extends Component {
     this.setState({showModal: false});
   }
 
-  renderItem() {
-    return (
-      <View>
-        <Text>{this.props.value}</Text>
-      </View>
-    )
-  }
-
   render() {
     return (
       <View style={styles.container}>
         <Header title="Simple Finance" addItem={this.addItem} />
         <ListView
+          style={{paddingBottom: 20, marginTop: -20}}
           dataSource={this.state.dataSource}
-          renderRow={this.renderItem.bind(this)}
-          enableEmptySections={true}
-          style={styles.listview}/>
+          renderRow={ this.renderRow } />
         <Modal visible={this.state.showModal}>
           <AddItem close={this.closeModal} title='Add Item' />
         </Modal>
@@ -86,4 +87,4 @@ class ToDo extends Component {
   }
 }
 
-module.exports = ToDo;
+module.exports = Main;

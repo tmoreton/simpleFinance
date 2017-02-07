@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import ReactNative from 'react-native';
 const styles = require('../theme/theme.js');
-import toDo from './toDo.js';
+import main from './main.js';
 const firebase = require('../config/firebase');
 
 import {
@@ -29,7 +29,7 @@ class login extends Component {
     var state = this;
     firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).then(function() {
       // Create Account successful.
-      state.props.navigator.push({title: "To Do", component: toDo });
+      state.props.navigator.push({title: "Simple Finance", component: main });
     }, function(error) {
       // An error happened.
       var errorMessage = error.message;
@@ -41,7 +41,7 @@ class login extends Component {
     var state = this;
     firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password).then(function() {
       // Login successful.
-      state.props.navigator.push({title: "To Do", component: toDo });
+      state.props.navigator.push({title: "Simple Finance", component: main });
     }, function(error) {
       // An error happened.
       var errorMessage = error.message;
