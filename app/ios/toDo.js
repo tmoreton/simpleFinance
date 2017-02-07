@@ -3,8 +3,8 @@
 import React, { Component } from 'react';
 import ReactNative from 'react-native';
 const styles = require('../theme/theme.js');
-const StatusBar = require('../components/StatusBar');
-const ActionButton = require('../components/ActionButton');
+const Header = require('../components/Header');
+import AddItem from './addItem.js';
 const ListItem = require('../components/ListItem');
 const firebase = require('../config/firebase');
 
@@ -17,6 +17,7 @@ import {
   TouchableHighlight,
   AlertIOS,
   NavigatorIOS,
+  Modal,
 } from 'react-native';
 
 class ToDo extends Component {
@@ -26,8 +27,11 @@ class ToDo extends Component {
     this.state = {
       dataSource: new ListView.DataSource({
         rowHasChanged: (row1, row2) => row1 !== row2,
-      })
+      }),
+      showModal: false
     };
+    this.addItem = this.addItem.bind(this);
+    this.closeModal = this.closeModal.bind(this);
     this.itemsRef = this.getRef().child(firebase.auth().currentUser.uid);
   }
 
@@ -58,37 +62,12 @@ class ToDo extends Component {
     this.listenForItems(this.itemsRef);
   }
 
-  render() {
-    return (
-      <View style={styles.container}>
-        <StatusBar title="To Do's"/>
-        <ListView
-          dataSource={this.state.dataSource}
-          renderRow={this._renderItem.bind(this)}
-          enableEmptySections={true}
-          style={styles.listview}/>
-
-        <ActionButton onPress={this._addItem.bind(this)} title="Add" />
-
-      </View>
-    )
+  addItem() {
+    this.setState({showModal: true});
   }
 
-  _addItem() {
-    AlertIOS.prompt(
-      'Add New Item',
-      null,
-      [
-        {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
-        {
-          text: 'Add',
-          onPress: (text) => {
-            this.itemsRef.push({ title: text })
-          }
-        },
-      ],
-      'plain-text'
-    );
+  closeModal(){
+    this.setState({showModal: false});
   }
 
   _renderItem(item) {
@@ -109,6 +88,21 @@ class ToDo extends Component {
     );
   }
 
+  render() {
+    return (
+      <View style={styles.container}>
+        <Header title="Simple Finance" addItem={this.addItem} />
+        <ListView
+          dataSource={this.state.dataSource}
+          renderRow={this._renderItem.bind(this)}
+          enableEmptySections={true}
+          style={styles.listview}/>
+        <Modal visible={this.state.showModal}>
+            <AddItem close={this.closeModal} title='Add Item' />
+        </Modal>
+      </View>
+    )
+  }
 }
 
 module.exports = ToDo;

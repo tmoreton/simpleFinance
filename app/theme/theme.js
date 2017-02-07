@@ -5,9 +5,29 @@ const constants = {
 };
 
 var styles = StyleSheet.create({
+  flex: {
+    flex: 1,
+    justifyContent: 'center',
+    alignSelf: 'center',
+    alignItems: 'center',
+  },
+  center: {
+    justifyContent: 'space-around',
+    alignSelf: 'center',
+    alignItems: 'center',
+  },
+  left: {
+    justifyContent: 'flex-start',
+  },
+  right: {
+    justifyContent: 'flex-end',
+  },
   container: {
     backgroundColor: '#f2f2f2',
     flex: 1,
+  },
+  modal: {
+    backgroundColor: '#fff',
   },
   listview: {
     flex: 1,
@@ -28,24 +48,21 @@ var styles = StyleSheet.create({
     color: '#333',
     fontSize: 16,
   },
+  header: {
+    backgroundColor: '#fff',
+  },
   navbar: {
     alignItems: 'center',
     backgroundColor: '#fff',
-    borderBottomColor: '#eee',
-    borderColor: 'transparent',
-    borderWidth: 1,
-    justifyContent: 'center',
-    height: 44,
-    flexDirection: 'row'
+    justifyContent: 'space-between',
+    height: 55,
+    flexDirection: 'row',
+    marginTop: 10
   },
   navbarTitle: {
     color: '#444',
     fontSize: 16,
     fontWeight: "500"
-  },
-  statusbar: {
-    backgroundColor: '#fff',
-    height: 22,
   },
   center: {
     textAlign: 'center',

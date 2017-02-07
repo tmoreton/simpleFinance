@@ -2,11 +2,11 @@
 import * as firebase from 'firebase';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCAm9TWT0Lk2qTqdIPktJDUYXawSjHfDS4",
-  authDomain: "test-9b9b8.firebaseapp.com",
-  databaseURL: "https://test-9b9b8.firebaseio.com",
-  storageBucket: "test-9b9b8.appspot.com",
-  messagingSenderId: "335029587633"
+  apiKey: "AIzaSyBzrVV0uAztaBi_YfE_CYFDhlt2uzLztvk",
+  authDomain: "simplefinance-c886b.firebaseapp.com",
+  databaseURL: "https://simplefinance-c886b.firebaseio.com",
+  storageBucket: "simplefinance-c886b.appspot.com",
+  messagingSenderId: "933965917553"
 };
 
 const firebaseApp = firebase.initializeApp(firebaseConfig);

@@ -3,7 +3,6 @@
 import React, { Component } from 'react';
 import ReactNative from 'react-native';
 const styles = require('../theme/theme.js');
-const flex = require('../theme/flex.js');
 import toDo from './toDo.js';
 const firebase = require('../config/firebase');
 
@@ -23,7 +22,7 @@ import {
 class login extends Component {
   constructor(props) {
       super(props);
-      this.state = {email: '', password:''};
+      this.state = {email: 'tmoreton89@gmail.com', password:'Abc123'};
   }
 
   createAccount = () => {
@@ -52,7 +51,7 @@ class login extends Component {
 
   render() {
     return (
-      <View style={ flex.flex }>
+      <View style={ styles.flex }>
           <TextInput 
             placeholder="email" 
             ref="username" 
@@ -62,6 +61,7 @@ class login extends Component {
           <TextInput 
             placeholder="password" 
             ref="password"
+            secureTextEntry={true}
             onChangeText={(password)=>this.setState({password})} 
             value={this.state.password}
             style={{height: 50, textAlign: 'center', marginBottom: 50}} />
