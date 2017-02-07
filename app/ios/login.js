@@ -58,7 +58,7 @@ class login extends Component {
           ref="username" 
           onChangeText={(email)=>this.setState({email})} 
           value={this.state.email}
-          style={ styles.loginInput }/>
+          style={ styles.input }/>
         <View style={styles.line} />
         <TextInput 
           placeholder="password" 
@@ -66,15 +66,14 @@ class login extends Component {
           secureTextEntry={true}
           onChangeText={(password)=>this.setState({password})} 
           value={this.state.password}
-          style={ styles.loginInput } />
+          style={ styles.input } />
         <View style={styles.line} />
-                <View style={{marginTop: 10, marginBottom: 10}}></View>
-
+        <View style={{marginTop: 10, marginBottom: 10}}></View>
         <TouchableHighlight onPress={this.login}>
           <Text style={styles.btn}>Login</Text>
         </TouchableHighlight>
         <TouchableHighlight onPress={this.createAccount}>
-          <Text style={styles.createAccount}>Create Account</Text>
+          <Text style={styles.text}>Create Account</Text>
         </TouchableHighlight>
       </View>
     )

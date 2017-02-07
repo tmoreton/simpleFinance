@@ -13,10 +13,8 @@ var styles = StyleSheet.create({
     alignSelf: 'center',
     alignItems: 'center',
   },
-  center: {
-    justifyContent: 'space-around',
-    alignSelf: 'center',
-    alignItems: 'center',
+  row: {
+    flexDirection: 'row',
   },
   left: {
     justifyContent: 'flex-start',
@@ -33,23 +31,25 @@ var styles = StyleSheet.create({
     width: 150, 
     textAlign: 'center',
     fontFamily: constants.font,
+    margin: 5
   },
-  container: {
-    backgroundColor: '#f2f2f2',
-    flex: 1,
+  expense: {
+    backgroundColor: '#EC6778',
+    borderWidth: 0,
   },
-  modal: {
-    backgroundColor: '#fff',
+  income: {
+    backgroundColor: '#529A86',
+    borderWidth: 0,
   },
   listview: {
     flex: 1,
   },
-  loginInput: {
+  input: {  
     height: 45, 
     textAlign: 'center',
     fontFamily: constants.font,
   },
-  createAccount: {
+  text: {
     fontFamily: constants.font,
   },
   logo: {
@@ -64,7 +64,7 @@ var styles = StyleSheet.create({
     borderColor: constants.border,
     borderWidth: 0.5,
     height: 1,
-    width: 200
+    alignSelf: 'stretch',
   },
   header: {
     backgroundColor: '#fff',

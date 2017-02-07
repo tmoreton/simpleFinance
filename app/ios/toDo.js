@@ -5,7 +5,6 @@ import ReactNative from 'react-native';
 const styles = require('../theme/theme.js');
 const Header = require('../components/Header');
 import AddItem from './addItem.js';
-const ListItem = require('../components/ListItem');
 const firebase = require('../config/firebase');
 
 import {
@@ -32,34 +31,26 @@ class ToDo extends Component {
     };
     this.addItem = this.addItem.bind(this);
     this.closeModal = this.closeModal.bind(this);
-    this.itemsRef = this.getRef().child(firebase.auth().currentUser.uid);
   }
 
-  getRef() {
-    return firebase.database().ref();
-  }
-
-  listenForItems(itemsRef) {
-    itemsRef.on('value', (snap) => {
-
-      // get children as an array
+  listenForItems() {
+    firebase.database().ref(firebase.auth().currentUser.uid).on('value', (snap) => {
       var items = [];
       snap.forEach((child) => {
         items.push({
-          title: child.val().title,
+          value: child.val(),
           _key: child.key
         });
       });
-
+      console.log(items)
       this.setState({
         dataSource: this.state.dataSource.cloneWithRows(items)
       });
-
     });
   }
 
-  componentDidMount() {
-    this.listenForItems(this.itemsRef);
+  componentWillMount() {
+    this.listenForItems();
   }
 
   addItem() {
@@ -70,22 +61,12 @@ class ToDo extends Component {
     this.setState({showModal: false});
   }
 
-  _renderItem(item) {
-
-    const onPress = () => {
-      AlertIOS.alert(
-        'Complete',
-        null,
-        [
-          {text: 'Complete', onPress: (text) => this.itemsRef.child(item._key).remove()},
-          {text: 'Cancel', onPress: (text) => console.log('Cancelled')}
-        ]
-      );
-    };
-
+  renderItem() {
     return (
-      <ListItem item={item} onPress={onPress} />
-    );
+      <View>
+        <Text>{this.props.value}</Text>
+      </View>
+    )
   }
 
   render() {
@@ -94,11 +75,11 @@ class ToDo extends Component {
         <Header title="Simple Finance" addItem={this.addItem} />
         <ListView
           dataSource={this.state.dataSource}
-          renderRow={this._renderItem.bind(this)}
+          renderRow={this.renderItem.bind(this)}
           enableEmptySections={true}
           style={styles.listview}/>
         <Modal visible={this.state.showModal}>
-            <AddItem close={this.closeModal} title='Add Item' />
+          <AddItem close={this.closeModal} title='Add Item' />
         </Modal>
       </View>
     )

@@ -25,6 +25,7 @@ class Header extends Component {
             <Text style={styles.navText}>{this.props.title}</Text>
             <TouchableOpacity style={{width: 50, marginRight: 10}}></TouchableOpacity>
           </View>
+          <View style={styles.line} />
         </View>
     );
   }
