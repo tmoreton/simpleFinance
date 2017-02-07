@@ -20,9 +20,9 @@ class Header extends Component {
         <View style={styles.header}>
           <View style={styles.navbar}>
             <TouchableOpacity style={{width: 50, marginLeft: 10}} onPress={this.props.addItem}>
-              <Text>Add +</Text>
+              <Text style={styles.navText}>Add +</Text>
             </TouchableOpacity>
-            <Text>{this.props.title}</Text>
+            <Text style={styles.navText}>{this.props.title}</Text>
             <TouchableOpacity style={{width: 50, marginRight: 10}}></TouchableOpacity>
           </View>
         </View>

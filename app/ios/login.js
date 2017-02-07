@@ -52,25 +52,29 @@ class login extends Component {
   render() {
     return (
       <View style={ styles.flex }>
-          <TextInput 
-            placeholder="email" 
-            ref="username" 
-            onChangeText={(email)=>this.setState({email})} 
-            value={this.state.email}
-            style={{height: 50, textAlign: 'center', marginTop: 50 }}/>
-          <TextInput 
-            placeholder="password" 
-            ref="password"
-            secureTextEntry={true}
-            onChangeText={(password)=>this.setState({password})} 
-            value={this.state.password}
-            style={{height: 50, textAlign: 'center', marginBottom: 50}} />
+        <Text style={styles.logo}>$imple Finance</Text>
+        <TextInput 
+          placeholder="email" 
+          ref="username" 
+          onChangeText={(email)=>this.setState({email})} 
+          value={this.state.email}
+          style={ styles.loginInput }/>
+        <View style={styles.line} />
+        <TextInput 
+          placeholder="password" 
+          ref="password"
+          secureTextEntry={true}
+          onChangeText={(password)=>this.setState({password})} 
+          value={this.state.password}
+          style={ styles.loginInput } />
+        <View style={styles.line} />
+                <View style={{marginTop: 10, marginBottom: 10}}></View>
+
         <TouchableHighlight onPress={this.login}>
           <Text style={styles.btn}>Login</Text>
         </TouchableHighlight>
-        <Text style={{marginTop: 10, marginBottom: 10}}>OR</Text>
         <TouchableHighlight onPress={this.createAccount}>
-          <Text style={styles.btn}>Create Account</Text>
+          <Text style={styles.createAccount}>Create Account</Text>
         </TouchableHighlight>
       </View>
     )
