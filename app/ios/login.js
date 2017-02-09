@@ -22,7 +22,7 @@ import {
 class login extends Component {
   constructor(props) {
       super(props);
-      this.state = {email: 'tmoreton89@gmail.com', password:'Abc123'};
+      this.state = {email: '', password:''};
   }
 
   createAccount = () => {

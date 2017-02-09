@@ -86,62 +86,57 @@ class Main extends Component {
 
   // getItems() {
   //   var ref = firebase.database().ref(firebase.auth().currentUser.uid)
-  //   ref.on('value', (snap) => {
+  //   ref.orderByChild('date').equalTo(this.getWeekNumber()).on('value', (snap) => {
   //     var items = [];
 
   //     var item = {
-  //       income: 0,
-  //       expense: 0,
-  //       date: ''
+  //       amount: 0,
+  //       type: '',
+  //       name: ''
   //     };
 
-  //     var totalIncome = 0;
-  //     var totalExpense = 0;
+  //     var income = 0;
+  //     var expense = 0;
 
   //     snap.forEach((child) => {
         
   //       // track totals
   //       if ( child.val().type == 'income' ) {
-  //         totalIncome += Number(child.val().amount)
+  //         income += Number(child.val().amount)
   //       } else {
-  //         totalExpense += Number(child.val().amount)
+  //         expense += Number(child.val().amount)
   //       }
 
-  //       // if its the first item set date
-  //       if (item.date == ''){ item.date = child.val().date }
-
-  //       // group together different categories
-  //       if (child.val().date == item.date){
-  //         if ( child.val().type == 'income' ) {
-  //           item.income += Number(child.val().amount)
-  //         } else {
-  //           item.expense += Number(child.val().amount)
-  //         }
+  //       if (items.filter(function(e) { return e.name == child.val().name; }).length > 0) {
+  //         console.log("here!")
+  //         items.filter(function(e) {
+  //           if (e.name == child.val().name){
+  //             e.amount = Number(e.amount) + Number(child.val().amount)
+  //           }
+  //         })
+          
   //       } else {
+  //         console.log("none here")
+  //         item.amount = child.val().amount
+  //         item.type = child.val().type
+  //         item.name = child.val().name
   //         items.push(item);
   //         item = {
-  //           income: 0,
-  //           expense: 0,
-  //           date: child.val().date
+  //           amount: 0,
+  //           type: '',
+  //           name: ''
   //         };
-  //         if ( child.val().type == 'income' ) {
-  //           item.income += Number(child.val().amount)
-  //         } else {
-  //           item.expense += Number(child.val().amount)
-  //         }
   //       }
   //     });
-
-  //     items.push(item);
   //     this.setState({
   //       dataSource: ds.cloneWithRows(items),
-  //       totalIncome: totalIncome,
-  //       totalExpense: totalExpense
+  //       income: income,
+  //       expense: expense
   //     });
 
   //   });
   // }
-  
+
   renderRow(rowData) {
     if (rowData.type == 'income'){
       return (
