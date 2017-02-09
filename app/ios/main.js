@@ -5,6 +5,7 @@ import ReactNative from 'react-native';
 const styles = require('../theme/theme.js');
 const Header = require('../components/Header');
 import AddItem from './addItem.js';
+import History from './history.js';
 const firebase = require('../config/firebase');
 
 import {
@@ -31,6 +32,7 @@ class Main extends Component {
       expense: 0
     };
     this.addItem = this.addItem.bind(this);
+    this.history = this.history.bind(this);
     this.renderRow = this.renderRow.bind(this);
     this.getWeekNumber = this.getWeekNumber.bind(this);
   }
@@ -82,6 +84,64 @@ class Main extends Component {
     });
   }
 
+  // getItems() {
+  //   var ref = firebase.database().ref(firebase.auth().currentUser.uid)
+  //   ref.on('value', (snap) => {
+  //     var items = [];
+
+  //     var item = {
+  //       income: 0,
+  //       expense: 0,
+  //       date: ''
+  //     };
+
+  //     var totalIncome = 0;
+  //     var totalExpense = 0;
+
+  //     snap.forEach((child) => {
+        
+  //       // track totals
+  //       if ( child.val().type == 'income' ) {
+  //         totalIncome += Number(child.val().amount)
+  //       } else {
+  //         totalExpense += Number(child.val().amount)
+  //       }
+
+  //       // if its the first item set date
+  //       if (item.date == ''){ item.date = child.val().date }
+
+  //       // group together different categories
+  //       if (child.val().date == item.date){
+  //         if ( child.val().type == 'income' ) {
+  //           item.income += Number(child.val().amount)
+  //         } else {
+  //           item.expense += Number(child.val().amount)
+  //         }
+  //       } else {
+  //         items.push(item);
+  //         item = {
+  //           income: 0,
+  //           expense: 0,
+  //           date: child.val().date
+  //         };
+  //         if ( child.val().type == 'income' ) {
+  //           item.income += Number(child.val().amount)
+  //         } else {
+  //           item.expense += Number(child.val().amount)
+  //         }
+  //       }
+  //     });
+
+  //     items.push(item);
+  //     this.setState({
+  //       dataSource: ds.cloneWithRows(items),
+  //       totalIncome: totalIncome,
+  //       totalExpense: totalExpense
+  //     });
+
+  //   });
+  // }
+  
   renderRow(rowData) {
     if (rowData.type == 'income'){
       return (
@@ -114,10 +174,17 @@ class Main extends Component {
     });
   }
 
+  history() {
+    this.props.navigator.push({
+      title: "History",
+      component: History,
+    });
+  }
+
   render() {
     return (
       <View style={styles.container}>
-        <Header title="Simple Finance" addItem={this.addItem} />
+        <Header title="Simple Finance" addItem={this.addItem} history={this.history} />
         <ListView
           style={{paddingBottom: 20, marginTop: -20}}
           dataSource={this.state.dataSource}
