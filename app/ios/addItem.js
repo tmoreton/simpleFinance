@@ -19,17 +19,23 @@ class AddItem extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      amount: '',
-      category: '',
-      date: new Date()
+      amount: this.props.item.amount,
+      name: this.props.item.name,
+      date: this.props.item.date
     };
     this.income = this.income.bind(this);
     this.expense = this.expense.bind(this);
   }
 
+  close(){
+    if (this.props.item.key){
+      firebase.database().ref(firebase.auth().currentUser.uid + '/' + this.props.item.key).remove();
+    }
+    this.props.navigator.pop();
+  }
+
   getWeekNumber() {
       // Copy date so don't modify original
-      var date = new Date();
       var d = new Date();
       d.setHours(0,0,0,0);
       // Set to nearest Thursday: current date + 4 - current day number
@@ -39,28 +45,23 @@ class AddItem extends Component {
       var yearStart = new Date(d.getFullYear(),0,1);
       // Calculate full weeks to nearest Thursday
       var weekNo = Math.ceil(( ( (d - yearStart) / 86400000) + 1)/7);
-      var day = date.getDay()
-      if (day === 0 ) {
-        day = 7
-      }
-      return d.getFullYear() + '-' + weekNo + '-' + day
+      return d.getFullYear() + '-' + weekNo
   }
-
 
   income(){
     var params = {
       date: this.getWeekNumber(),
       type: 'income',
-      category: this.state.category.toLowerCase(),
+      name: this.state.name.toLowerCase(),
       amount: this.state.amount
     }
-    if (this.state.category == '') {
-      AlertIOS.alert('Please enter Category');
+    if (this.state.name == '') {
+      AlertIOS.alert('Please give name to Income');
     } else if (this.state.amount == '') {
       AlertIOS.alert('Enter Amount');
     } else {
       firebase.database().ref(firebase.auth().currentUser.uid).push(params);
-      this.props.close()
+      this.close()
     }
   }
 
@@ -68,16 +69,16 @@ class AddItem extends Component {
     var params = {
       date: this.getWeekNumber(),
       type: 'expense',
-      category: this.state.category.toLowerCase(),
+      name: this.state.name.toLowerCase(),
       amount: this.state.amount
     }
-    if (this.state.category == '') {
-      AlertIOS.alert('Please enter Category');
+    if (this.state.name == '') {
+      AlertIOS.alert('Please give name to expense');
     } else if (this.state.amount == '') {
       AlertIOS.alert('Enter Amount');
     } else {
       firebase.database().ref(firebase.auth().currentUser.uid).push(params);
-      this.props.close()
+      this.close()
     }
   }
 
@@ -85,10 +86,10 @@ class AddItem extends Component {
     return (
       <View style={styles.flex}>
         <TextInput 
-          placeholder="Category ie. 'Lunch' "
-          ref="category" 
-          onChangeText={(category)=>this.setState({category})} 
-          value={this.state.category}
+          placeholder="ie. 'Lunch' "
+          ref="name" 
+          onChangeText={(name)=>this.setState({name})} 
+          value={this.state.name}
           style={ styles.input }/>
         <View style={styles.line} />
         <View style={{marginTop: 10, marginBottom: 10}}></View>
@@ -109,8 +110,8 @@ class AddItem extends Component {
             <Text style={[ styles.btn, styles.expense ]}>-Expense</Text>
           </TouchableOpacity>
         </View>
-        <TouchableOpacity onPress={this.props.close}>
-          <Text style={styles.text}>Close</Text>
+        <TouchableOpacity onPress={()=>this.close()}>
+          <Text style={styles.text}>Remove</Text>
         </TouchableOpacity>
       </View>
     )

@@ -7,6 +7,9 @@ const constants = {
 };
 
 var styles = StyleSheet.create({
+  container: {
+    flex: 1
+  },
   flex: {
     flex: 1,
     justifyContent: 'center',
@@ -31,14 +34,54 @@ var styles = StyleSheet.create({
     width: 150, 
     textAlign: 'center',
     fontFamily: constants.font,
-    margin: 5
+    margin: 5,
+    fontSize: 18
+  },
+  rowData: {
+    height:60, 
+    borderBottomWidth:1, 
+    borderBottomColor: '#ddd', 
+    flexDirection:'row', 
+    justifyContent: 'space-between', 
+    alignItems: 'center',
+    padding: 10
+  },
+  bottomRow: {
+    height:60, 
+    borderTopWidth:2, 
+    borderTopColor: '#ddd', 
+    flexDirection:'row', 
+    justifyContent: 'space-between', 
+    alignItems: 'center',
+    padding: 20
+  },
+  bottomBlock: {
+    alignItems: 'center',
+  },
+  greenText: {
+    color: '#71ceb4',
+    fontFamily: constants.font,
+    fontWeight: '500',
+    fontSize: 18
+  },
+  redText: {
+    color: '#EC6778',
+    fontFamily: constants.font,
+    fontWeight: '500',
+    fontSize: 18
+  },
+  greenRow: {
+    backgroundColor: '#71ceb4',
+  },
+  redRow: {
+    backgroundColor: '#EC6778',
   },
   expense: {
     backgroundColor: '#EC6778',
     borderWidth: 0,
   },
   income: {
-    backgroundColor: '#529A86',
+    backgroundColor: '#71ceb4',
     borderWidth: 0,
   },
   listview: {
@@ -46,11 +89,13 @@ var styles = StyleSheet.create({
   },
   input: {  
     height: 45, 
+    fontSize: 18,
     textAlign: 'center',
     fontFamily: constants.font,
   },
   text: {
     fontFamily: constants.font,
+    fontSize: 18
   },
   logo: {
     fontFamily: constants.font,
@@ -79,7 +124,6 @@ var styles = StyleSheet.create({
   },
   navText:{
     fontFamily: constants.font,
-    fontWeight: '400',
     fontSize: 16
   },
 })

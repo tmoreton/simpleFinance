@@ -22,8 +22,10 @@ class Header extends Component {
             <TouchableOpacity style={{width: 50, marginLeft: 10}} onPress={this.props.addItem}>
               <Text style={styles.navText}>Add +</Text>
             </TouchableOpacity>
-            <Text style={styles.navText}>{this.props.title}</Text>
-            <TouchableOpacity style={{width: 50, marginRight: 10}}></TouchableOpacity>
+            <Text style={{ fontFamily: "GillSans-Light", fontWeight: '500', fontSize: 16 }}>{this.props.title}</Text>
+            <TouchableOpacity style={{width: 50, marginRight: 10}}>
+              <Text style={styles.navText}>History</Text>
+            </TouchableOpacity>
           </View>
           <View style={styles.line} />
         </View>
