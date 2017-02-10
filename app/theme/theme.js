@@ -4,6 +4,7 @@ const {StyleSheet} = React
 const constants = {
   font: "GillSans-Light",
   border: '#dbdbdb',
+  lightGreen: "#56bd7a"
 };
 
 var styles = StyleSheet.create({
@@ -99,10 +100,22 @@ var styles = StyleSheet.create({
   },
   logo: {
     fontFamily: constants.font,
-    paddingBottom: 50,
+    color: constants.lightGreen,
+    fontStyle: 'italic',
+    fontWeight: '600',
     paddingLeft: 75,
     paddingRight: 75,
-    fontSize: 40,
+    fontSize: 150,
+    textAlign: 'center'
+  },
+  logoText: {
+    fontFamily: constants.font,
+    color: constants.lightGreen,
+    fontWeight: '400',
+    paddingBottom: 30,
+    paddingLeft: 75,
+    paddingRight: 75,
+    fontSize: 30,
     textAlign: 'center'
   },
   line: {

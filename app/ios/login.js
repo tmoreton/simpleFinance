@@ -52,7 +52,8 @@ class login extends Component {
   render() {
     return (
       <View style={ styles.flex }>
-        <Text style={styles.logo}>$imple Finance</Text>
+        <Text style={styles.logo}>$</Text>
+        <Text style={styles.logoText}>Simple Finance</Text>
         <TextInput 
           placeholder="email" 
           ref="username" 
