@@ -34,6 +34,10 @@ class AddItem extends Component {
     this.props.navigator.pop();
   }
 
+  back(){
+    this.props.navigator.pop();
+  }
+
   getWeekNumber() {
       // Copy date so don't modify original
       var d = new Date();
@@ -85,6 +89,9 @@ class AddItem extends Component {
   render() {
     return (
       <View style={styles.flex}>
+        <TouchableOpacity style={{position: 'absolute', top:45, right: 10}} onPress={()=>this.back()}>
+          <Text style={[styles.text, {fontSize: 35}]}>X</Text>
+        </TouchableOpacity>
         <TextInput 
           placeholder="ie. 'Lunch' "
           ref="name" 

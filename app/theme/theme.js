@@ -96,7 +96,8 @@ var styles = StyleSheet.create({
   },
   text: {
     fontFamily: constants.font,
-    fontSize: 18
+    fontSize: 18,
+    textAlign: 'center',
   },
   logo: {
     fontFamily: constants.font,

@@ -17,12 +17,13 @@ import {
   NavigatorIOS,
   TextInput,
   AlertIOS,
+  TouchableOpacity,
 } from 'react-native';
 
 class login extends Component {
   constructor(props) {
       super(props);
-      this.state = {email: '', password:''};
+      this.state = {email: '', password:'', login: true};
   }
 
   createAccount = () => {
@@ -49,6 +50,44 @@ class login extends Component {
     });
   }
 
+  back = () => {
+    this.setState({
+      login: true
+    });
+  }
+
+  create = () => {
+    this.setState({
+      login: false
+    });
+  }
+
+  renderBtn() {
+    if (this.state.login === true) {
+      return (
+        <View>
+          <TouchableOpacity onPress={this.login}>
+            <Text style={styles.btn}>Login</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={this.create}>
+            <Text style={styles.text}>Create Account</Text>
+          </TouchableOpacity>
+        </View>
+      );
+    } else {
+      return (
+        <View>
+          <TouchableOpacity onPress={this.createAccount}>
+            <Text style={styles.btn}>Create Account</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={this.back}>
+            <Text style={styles.text}>Back</Text>
+          </TouchableOpacity>
+        </View>
+      );
+    }
+  }
+
   render() {
     return (
       <View style={ styles.flex }>
@@ -70,12 +109,7 @@ class login extends Component {
           style={ styles.input } />
         <View style={styles.line} />
         <View style={{marginTop: 10, marginBottom: 10}}></View>
-        <TouchableHighlight onPress={this.login}>
-          <Text style={styles.btn}>Login</Text>
-        </TouchableHighlight>
-        <TouchableHighlight onPress={this.createAccount}>
-          <Text style={styles.text}>Create Account</Text>
-        </TouchableHighlight>
+        {this.renderBtn()}
       </View>
     )
   }

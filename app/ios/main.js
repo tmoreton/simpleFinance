@@ -18,6 +18,7 @@ import {
   AlertIOS,
   NavigatorIOS,
   Modal,
+  ActivityIndicator
 } from 'react-native';
 
 var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
@@ -29,7 +30,8 @@ class Main extends Component {
     this.state = {
       dataSource: ds.cloneWithRows([]),
       income: 0,
-      expense: 0
+      expense: 0,
+      animating: true
     };
     this.addItem = this.addItem.bind(this);
     this.history = this.history.bind(this);
@@ -79,7 +81,8 @@ class Main extends Component {
       this.setState({
         dataSource: ds.cloneWithRows(items),
         income: income,
-        expense: expense
+        expense: expense,
+        animating: false
       });
     });
   }
@@ -176,10 +179,25 @@ class Main extends Component {
     });
   }
 
+  activity(){
+    if(this.state.animating === true){
+      return (
+        <View>
+          <ActivityIndicator
+            animating={this.state.animating}
+            style={{height: 80, alignItems: 'center', justifyContent: 'center', padding: 25,}}
+            size="large" />
+          <Text style={styles.text}>Retrieving your expenses!</Text>
+        </View>
+      )
+    }
+  }
+
   render() {
     return (
       <View style={styles.container}>
         <Header title="Simple Finance" addItem={this.addItem} history={this.history} />
+        {this.activity()}
         <ListView
           style={{paddingBottom: 20, marginTop: -20}}
           dataSource={this.state.dataSource}
