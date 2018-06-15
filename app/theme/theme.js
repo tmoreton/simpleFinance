@@ -134,11 +134,11 @@ var styles = StyleSheet.create({
     justifyContent: 'space-between',
     height: 55,
     flexDirection: 'row',
-    marginTop: 10,
+    marginTop: 25,
   },
   navText:{
     fontFamily: constants.font,
-    fontSize: 16
+    fontSize: 18
   },
 })
 

@@ -26,6 +26,15 @@ class login extends Component {
       this.state = {email: '', password:'', login: true};
   }
 
+  componentWillMount() {
+    var state = this;
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user != null) {
+        state.props.navigator.push({title: "Simple Finance", component: main });
+      }
+    });
+  }
+
   createAccount = () => {
     var state = this;
     firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).then(function() {
